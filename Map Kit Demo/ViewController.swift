@@ -17,9 +17,23 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     let locationManager = CLLocationManager()
-    let regionCenter = CLLocationCoordinate2D(latitude: 33.597892, longitude: 73.021813)
-    let regionRadius: CLLocationDistance = 100
-    let regionIdentifier = "CustomGeofence"
+    let geofences: [Geofence] = [
+        Geofence(
+            identifier: "CustomGeofence",
+            name: "Afshan Colony, Rawalpindi",
+            centerLatitude: 33.597892,
+            centerLongitude: 73.021813,
+            radius: 100
+        ),
+        Geofence(
+            identifier: "CustomGeofence",
+            name: "Mumbai",
+            centerLatitude: 19.017175,
+            centerLongitude: 72.856001,
+            radius: 100
+        )
+        
+    ]
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -61,23 +75,23 @@ class ViewController: UIViewController {
             print("Geofencing is not supported on this device!")
             return
         }
-        
-        let geofenceRegion = CLCircularRegion(
-            center: regionCenter,
-            radius: regionRadius,
-            identifier: regionIdentifier
-        )
-        
-        geofenceRegion.notifyOnEntry = true
-        geofenceRegion.notifyOnExit = true
-        
-        locationManager.startMonitoring(for: geofenceRegion)
+        for (i, geofence) in geofences.enumerated() {
+            let region = CLCircularRegion(
+                center: CLLocationCoordinate2D(latitude: geofence.centerLatitude, longitude: geofence.centerLongitude),
+                radius: geofence.radius,
+                identifier: geofence.identifier + "\(i)"
+            )
+            region.notifyOnEntry = true
+            region.notifyOnExit = true
+            
+            locationManager.startMonitoring(for: region)
+        }
     }
     
     // MARK: - Map Helpers
     private func centerMapOnLocation() {
         let coordinateRegion = MKCoordinateRegion(
-            center: regionCenter,
+            center: locationManager.location?.coordinate ?? .init(latitude: 33.6975317, longitude: 73.0500902),
             latitudinalMeters: 500,
             longitudinalMeters: 500
         )
@@ -85,8 +99,10 @@ class ViewController: UIViewController {
     }
     
     private func addGeofenceOverlay() {
-        let circle = MKCircle(center: regionCenter, radius: regionRadius)
-        mapView.addOverlay(circle)
+        geofences.forEach { geofence in
+            let circle = MKCircle(center: CLLocationCoordinate2D(latitude: geofence.centerLatitude, longitude: geofence.centerLongitude), radius: geofence.radius)
+            mapView.addOverlay(circle)
+        }
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
@@ -125,14 +141,18 @@ extension ViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region.identifier == regionIdentifier {
-            sendNotification(title: "Welcome!", body: "You've entered the geofence area")
+        for (i, geofence) in geofences.enumerated() {
+            if region.identifier == geofence.identifier + "\(i)" {
+                sendNotification(title: "Welcome!", body: "You've entered \(geofence.name)")
+            }
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region.identifier == regionIdentifier {
-            sendNotification(title: "Goodbye!", body: "You've left the geofence area")
+        for (i, geofence) in geofences.enumerated() {
+            if region.identifier == geofence.identifier + "\(i)" {
+                sendNotification(title: "Goodbye!", body: "You've left \(geofence.name)")
+            }
         }
     }
     

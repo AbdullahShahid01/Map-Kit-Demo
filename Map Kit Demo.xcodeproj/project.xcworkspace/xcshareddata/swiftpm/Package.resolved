@@ -1,0 +1,24 @@
+{
+  "originHash" : "3a2aee966b6aa9fb00551ec54ae855404f088cda488ccdd2f9508d741c5fcfc1",
+  "pins" : [
+    {
+      "identity" : "anchorage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Rightpoint/Anchorage",
+      "state" : {
+        "revision" : "23a6dd0ccf9529d2750d8679a2e74a161cff2f16",
+        "version" : "4.5.0"
+      }
+    },
+    {
+      "identity" : "toast-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scalessec/Toast-Swift",
+      "state" : {
+        "revision" : "ddccd20d6fb718448d9b179c454c561653fda7d5",
+        "version" : "5.1.1"
+      }
+    }
+  ],
+  "version" : 3
+}

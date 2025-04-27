@@ -59,7 +59,7 @@ class MainViewController: UIViewController {
     private func configureSearchBar() {
         searchBar.delegate = self
         searchBar.showsCancelButton = true
-        searchBar.placeholder = "School, Hospital, etc."
+        searchBar.placeholder = "Search..."
     }
     
     private func configureMap() {

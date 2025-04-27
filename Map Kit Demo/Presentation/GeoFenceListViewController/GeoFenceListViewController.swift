@@ -12,6 +12,7 @@ class GeoFenceListViewController: UIViewController {
     private let viewModel = GeoFenceListViewModel()
     private let customNavBar = UIView()
     private let tableView = UITableView()
+    private let noDataLabel = UILabel()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -32,6 +33,8 @@ class GeoFenceListViewController: UIViewController {
                 strongSelf.configureUI()
             case .dismissVC:
                 strongSelf.dismiss(animated: true)
+            case .hideNoDateLabel:
+                strongSelf.noDataLabel.isHidden = true
             }
         }
     }
@@ -39,6 +42,7 @@ class GeoFenceListViewController: UIViewController {
     func configureUI() {
         configureNavBar()
         configureTableView()
+        configureNoDataLabel()
     }
     
     private func configureNavBar() {
@@ -89,6 +93,14 @@ class GeoFenceListViewController: UIViewController {
         tableView.estimatedRowHeight = 100
     }
     
+    private func configureNoDataLabel() {
+        noDataLabel.textColor = .label
+        noDataLabel.font = .systemFont(ofSize: 17, weight: .medium)
+        noDataLabel.textAlignment = .center
+        noDataLabel.text = "No Data Found"
+        view.addSubview(noDataLabel)
+        noDataLabel.centerAnchors == view.centerAnchors
+    }
     @objc
     private func backButtonTapped() {
         viewModel.input(.backButtonTapped)

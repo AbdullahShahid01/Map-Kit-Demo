@@ -17,12 +17,17 @@ final class GeoFenceListViewModel {
     enum Output {
         case configureUI
         case dismissVC
+        case hideNoDateLabel
     }
     
     var output: ((Output)->())?
     
     var locations: [GeoFence] {
-        return geoFenceRepository.getAll() ?? []
+        let data = geoFenceRepository.getAll() ?? []
+        if !data.isEmpty {
+            output?(.hideNoDateLabel)
+        }
+        return data
     }
     
     var tableViewRowCount: Int {

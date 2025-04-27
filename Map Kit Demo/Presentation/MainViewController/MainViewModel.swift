@@ -132,6 +132,7 @@ final class MainViewModel: NSObject {
             "q": searchQuery,
             "format": "json",
             "viewbox": viewBox, // Format: minLon, minLat, maxLon, maxLat
+            "bounded": 1, // Restrict results to the viewbox
             "limit": 50
         ]
         

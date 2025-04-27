@@ -51,8 +51,7 @@ final class AddGeoFencePopupViewModel {
         case .viewDidLoad:
             output?(.configureUI)
         case .saveButtonTapped:
-            break
-//            geofenceRepository.create(geoFence: Geofence(identifier: <#T##String#>, name: <#T##String#>, centerLatitude: <#T##Double#>, centerLongitude: <#T##Double#>, radius: <#T##Double#>, userNote: <#T##String#>))
+            _ = geofenceRepository.create(geoFence: Geofence(identifier: UUID(), name: name, centerLatitude: latitude, centerLongitude: longitude, radius: radius ?? 100, userNote: userNote ?? ""))
         }
     }
 }

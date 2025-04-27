@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
@@ -15,30 +15,60 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Map_Kit_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p54-m0-gyJ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="784"/>
+                                <rect key="frame" x="0.0" y="156" width="375" height="656"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="gST-eg-bZM">
+                                <rect key="frame" x="0.0" y="100" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="m7f-SA-sdz"/>
+                                </connections>
+                            </searchBar>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ps-qX-EJO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="TbF-Nk-NUG">
+                                        <rect key="frame" x="169" y="387.66666666666669" width="37" height="37"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="TbF-Nk-NUG" firstAttribute="centerY" secondItem="0Ps-qX-EJO" secondAttribute="centerY" id="EBv-Z8-6Vn"/>
+                                    <constraint firstItem="TbF-Nk-NUG" firstAttribute="centerX" secondItem="0Ps-qX-EJO" secondAttribute="centerX" id="a9L-oL-soJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="Zk9-G8-Xlw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="p54-m0-gyJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iIP-br-yBe"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="p54-m0-gyJ" secondAttribute="bottom" id="qau-ja-wBZ"/>
-                            <constraint firstItem="p54-m0-gyJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="w47-Su-QlH"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p54-m0-gyJ" secondAttribute="trailing" id="xjR-mk-Z9e"/>
+                            <constraint firstItem="p54-m0-gyJ" firstAttribute="top" secondItem="gST-eg-bZM" secondAttribute="bottom" id="1V7-pb-iIB"/>
+                            <constraint firstItem="0Ps-qX-EJO" firstAttribute="leading" secondItem="Zk9-G8-Xlw" secondAttribute="leading" id="1vM-B2-AHP"/>
+                            <constraint firstAttribute="bottom" secondItem="p54-m0-gyJ" secondAttribute="bottom" id="4WQ-SJ-yan"/>
+                            <constraint firstAttribute="trailing" secondItem="gST-eg-bZM" secondAttribute="trailing" id="CAG-l3-MeT"/>
+                            <constraint firstItem="p54-m0-gyJ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="JbD-6C-fuC"/>
+                            <constraint firstItem="gST-eg-bZM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="PG3-Je-ovg"/>
+                            <constraint firstItem="gST-eg-bZM" firstAttribute="top" secondItem="Zk9-G8-Xlw" secondAttribute="top" id="Y8x-5M-FHw"/>
+                            <constraint firstAttribute="bottom" secondItem="0Ps-qX-EJO" secondAttribute="bottom" id="gGn-KV-T5U"/>
+                            <constraint firstItem="p54-m0-gyJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mmZ-Wr-nmi"/>
+                            <constraint firstItem="0Ps-qX-EJO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nUc-Il-xwC"/>
+                            <constraint firstItem="0Ps-qX-EJO" firstAttribute="trailing" secondItem="Zk9-G8-Xlw" secondAttribute="trailing" id="tgY-Yj-wBc"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="0Ps-qX-EJO" id="Kt9-Ee-KwE"/>
                         <outlet property="mapView" destination="p54-m0-gyJ" id="tqz-gl-x5o"/>
+                        <outlet property="searchBar" destination="gST-eg-bZM" id="hIc-48-tN3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="4"/>
+            <point key="canvasLocation" x="138.40000000000001" y="2.9556650246305418"/>
         </scene>
     </scenes>
     <resources>

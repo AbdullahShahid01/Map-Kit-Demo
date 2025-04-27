@@ -8,21 +8,33 @@
 import Foundation
 import CoreLocation
 import UserNotifications
+import Alamofire
 
 final class ViewModel: NSObject {
     
     enum Input {
         case viewDidLoad
+        case searchButtonTapped
     }
     
     enum Output {
         case configureUI
+        case addCustomMarkers([Place])
+        case showLoader
+        case hideLoader
     }
     
     var output: ((Output)->())?
     
     var currentUserLocation: CLLocationCoordinate2D? {
         return locationManager.location?.coordinate
+    }
+    
+    var searchBarText: String = ""
+    var viewBox: String = "" {
+        didSet {
+            print("Viewbox: \(viewBox)")
+        }
     }
     
     let locationManager = CLLocationManager()
@@ -49,6 +61,20 @@ final class ViewModel: NSObject {
             output?(.configureUI)
             setupLocationManager()
             requestNotificationAuthorization()
+            
+        case .searchButtonTapped:
+            output?(.showLoader)
+            let text = searchBarText.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !text.isEmpty {
+                fetchPlaces(searchQuery: text, viewBox: viewBox/*"72.5,33.4,73.5,33.8"*/) { [weak self] places in
+                    guard let strongSelf = self else { return }
+                    strongSelf.output?(.hideLoader)
+                    if let places = places {
+                        print(places.count)
+                        strongSelf.output?(.addCustomMarkers(places))
+                    }
+                }
+            }
         }
     }
     
@@ -100,6 +126,42 @@ final class ViewModel: NSObject {
         )
         
         UNUserNotificationCenter.current().add(request)
+    }
+
+    ///
+    /// Fetches places data for the `searchQuery`.
+    /// `viewBox` is the minimum and maximum longitude and latitude passed as a comma separated string.
+    /// Sequence => min Longitude, min Latitude, max Longitude, max Latitude
+    ///
+    private func fetchPlaces(searchQuery: String, viewBox: String, completion: @escaping ([Place]?) -> Void) {
+        // API Endpoint
+        let url = "https://nominatim.openstreetmap.org/search"
+        
+        // Parameters
+        let parameters: [String: Any] = [
+            "q": searchQuery,
+            "format": "json",
+            "viewbox": viewBox, // Format: minLon, minLat, maxLon, maxLat
+            "limit": 50
+        ]
+        
+        AF.request(
+            url,
+            method: .get,
+            parameters: parameters,
+            encoding: URLEncoding.default,
+            headers: [:]
+        )
+        .validate()
+        .responseDecodable(of: [Place].self) { response in
+            switch response.result {
+            case .success(let places):
+                completion(places)
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
     }
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CB224B5D2DBCA6100049B597 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CB224B5C2DBCA6100049B597 /* Toast */; };
 		CBCAE4902DBBA4A400626A29 /* Anchorage in Frameworks */ = {isa = PBXBuildFile; productRef = CBCAE48F2DBBA4A400626A29 /* Anchorage */; };
+		CBE0CE762DBD33000079B316 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CBE0CE752DBD33000079B316 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBE0CE762DBD33000079B316 /* Alamofire in Frameworks */,
 				CB224B5D2DBCA6100049B597 /* Toast in Frameworks */,
 				CBCAE4902DBBA4A400626A29 /* Anchorage in Frameworks */,
 			);
@@ -87,6 +89,7 @@
 			packageProductDependencies = (
 				CBCAE48F2DBBA4A400626A29 /* Anchorage */,
 				CB224B5C2DBCA6100049B597 /* Toast */,
+				CBE0CE752DBD33000079B316 /* Alamofire */,
 			);
 			productName = "Map Kit Demo";
 			productReference = CBCAE4762DBBA04900626A29 /* Map Kit Demo.app */;
@@ -119,6 +122,7 @@
 			packageReferences = (
 				CBCAE48E2DBBA4A400626A29 /* XCRemoteSwiftPackageReference "Anchorage" */,
 				CB224B5B2DBCA6100049B597 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				CBE0CE742DBD33000079B316 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CBCAE4772DBBA04900626A29 /* Products */;
@@ -374,6 +378,14 @@
 				minimumVersion = 4.5.0;
 			};
 		};
+		CBE0CE742DBD33000079B316 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -386,6 +398,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CBCAE48E2DBBA4A400626A29 /* XCRemoteSwiftPackageReference "Anchorage" */;
 			productName = Anchorage;
+		};
+		CBE0CE752DBD33000079B316 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBE0CE742DBD33000079B316 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

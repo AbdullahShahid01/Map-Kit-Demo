@@ -14,6 +14,8 @@ class ViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var activityIndicatorView: UIView!
     
     private let viewModel = ViewModel()
     
@@ -33,6 +35,12 @@ class ViewController: UIViewController {
             switch output {
             case .configureUI:
                 strongSelf.configureUI()
+            case .addCustomMarkers(let places):
+                strongSelf.addCustomMarkers(places)
+            case .showLoader:
+                strongSelf.activityIndicatorView.isHidden = false
+            case .hideLoader:
+                strongSelf.activityIndicatorView.isHidden = true
             }
         }
     }
@@ -44,11 +52,23 @@ class ViewController: UIViewController {
     }
     
     private func configureUI() {
+        configureSearchBar()
+        configureMap()
+    }
+    
+    private func configureSearchBar() {
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        searchBar.placeholder = "School, Hospital, etc."
+    }
+    
+    private func configureMap() {
         mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.showsScale = true
         mapView.showsCompass = true
         mapView.showsLargeContentViewer = true
+        //mapView.setVisibleMapRect()
         centerMapOnLocation()
         addGeofenceOverlay()
     }
@@ -74,6 +94,35 @@ class ViewController: UIViewController {
             mapView.addOverlay(circle)
         }
     }
+    
+    private func addCustomMarkers(_ places: [Place]) {
+        mapView.removeAnnotations(mapView.annotations)
+        places.forEach { place in
+            let coordinate = CLLocationCoordinate2D(
+                latitude: Double(place.lat) ?? 0,
+                longitude: Double(place.lon) ?? 0
+            )
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = place.displayName
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    private func getViewbox(/*from mapView: MKMapView*/) -> String {
+        let region = mapView.region
+        let center = region.center
+        let span = region.span // Defines the "zoom level" (latitudeDelta/longitudeDelta)
+        
+        // Calculate the four corners of the visible region
+        let minLat = center.latitude - span.latitudeDelta / 2
+        let maxLat = center.latitude + span.latitudeDelta / 2
+        let minLon = center.longitude - span.longitudeDelta / 2
+        let maxLon = center.longitude + span.longitudeDelta / 2
+        
+        // Format: "minLon,minLat,maxLon,maxLat"
+        return String(format: "%.6f,%.6f,%.6f,%.6f", minLon, minLat, maxLon, maxLat)
+    }
 }
 
 // MARK: - MKMapViewDelegate
@@ -87,5 +136,97 @@ extension ViewController: MKMapViewDelegate {
             return renderer
         }
         return MKOverlayRenderer(overlay: overlay)
+    }
+    
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        // Skip if it's the user's location annotation
+//        guard !(annotation is MKUserLocation) else {
+//            return nil
+//        }
+//        
+//        let identifier = "CustomMarker"
+//        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+//        
+//        if annotationView == nil {
+//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+//            annotationView?.canShowCallout = true // Enable callout
+//        } else {
+//            annotationView?.annotation = annotation
+//        }
+//        
+//        // Set custom image (replace "custom_pin" with your image name)
+////        annotationView?.image = UIImage(named: "custom_pin")
+//        
+//        return annotationView
+//    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("Selected annotation: \(view.annotation!)")
+        print("Selected annotation: \(view.annotation?.coordinate.latitude)")
+        print("Selected annotation: \(view.annotation?.coordinate.longitude)")
+        print("Selected annotation: \(view.annotation?.title)")
+        print("Selected annotation: \(view.annotation?.subtitle)")
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        print("Deselected annotation: \(view.annotation!)")
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        let region: MKCoordinateRegion = mapView.region
+        print(">>> region.center.latitude: \(region.center.latitude)")
+        print(">>> region.center.longitude: \(region.center.longitude)")
+        print(">>> region.span.latitudeDelta: \(region.span.latitudeDelta)")
+        print(">>> region.span.longitudeDelta: \(region.span.longitudeDelta)")
+        print(">>> ")
+        viewModel.viewBox = getViewbox()
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        true
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        true
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        true
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.searchBarText = searchBar.text ?? ""
+        viewModel.input(.searchButtonTapped)
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+        
+    }
+
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
     }
 }

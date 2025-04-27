@@ -25,11 +25,11 @@ final class AddGeoFencePopupViewModel {
     }
     
     var longitudeLabelValue: String {
-        return "Longitude \(longitude)"
+        return "Longitude: \(longitude)"
     }
     
     var latitudeLabelValue: String {
-        return "Latitude \(latitude)"
+        return "Latitude: \(latitude)"
     }
     
     private let name: String

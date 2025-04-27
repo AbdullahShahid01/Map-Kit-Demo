@@ -69,6 +69,7 @@ final class AddGeoFencePopup: UIViewController {
         nameLabel.font = .systemFont(ofSize: 17, weight: .medium)
         nameLabel.textAlignment = .center
         nameLabel.text = viewModel.nameLabelValue
+        nameLabel.numberOfLines = 0
         mainStackView.addArrangedSubview(nameLabel)
     }
     
@@ -78,6 +79,7 @@ final class AddGeoFencePopup: UIViewController {
         longitudeLabel.font = .systemFont(ofSize: 17, weight: .medium)
         longitudeLabel.textAlignment = .center
         longitudeLabel.text = viewModel.longitudeLabelValue
+        longitudeLabel.numberOfLines = 0
         mainStackView.addArrangedSubview(longitudeLabel)
     }
     
@@ -87,10 +89,13 @@ final class AddGeoFencePopup: UIViewController {
         latitudeLabel.font = .systemFont(ofSize: 17, weight: .medium)
         latitudeLabel.textAlignment = .center
         latitudeLabel.text = viewModel.latitudeLabelValue
+        latitudeLabel.numberOfLines = 0
         mainStackView.addArrangedSubview(latitudeLabel)
     }
     
     private func configureCircularSlider() {
+        configureRadiusTitleLabel()
+        
         circularSlider.minimumValue = 100
         circularSlider.maximumValue = 1000
         circularSlider.numberOfRounds = 1
@@ -109,6 +114,15 @@ final class AddGeoFencePopup: UIViewController {
         configureSliderValueLabel()
         
         mainStackView.addArrangedSubview(circularSlider)
+    }
+    
+    private func configureRadiusTitleLabel() {
+        let radiusTitleLabel = UILabel()
+        radiusTitleLabel.textColor = .label
+        radiusTitleLabel.font = .systemFont(ofSize: 17, weight: .medium)
+        radiusTitleLabel.textAlignment = .center
+        radiusTitleLabel.text = "Geo-Fence Radius:"
+        mainStackView.addArrangedSubview(radiusTitleLabel)
     }
     
     private func configureSliderValueLabel() {

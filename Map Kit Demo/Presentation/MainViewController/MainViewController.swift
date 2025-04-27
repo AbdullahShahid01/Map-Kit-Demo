@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import UserNotifications
+import Anchorage
 
 class MainViewController: UIViewController {
 
@@ -54,6 +55,7 @@ class MainViewController: UIViewController {
     private func configureUI() {
         configureSearchBar()
         configureMap()
+        configureSeeGeoFencesButton()
     }
     
     private func configureSearchBar() {
@@ -73,6 +75,22 @@ class MainViewController: UIViewController {
         addGeofenceOverlay()
     }
     
+    private func configureSeeGeoFencesButton() {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .systemBlue
+        button.setTitle("See Saved Geo Fences", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(seeSavedGeoFencesTapped), for: .touchUpInside)
+        view.addSubview(button)
+        button.bottomAnchor == view.safeAreaLayoutGuide.bottomAnchor + 8
+        button.centerXAnchor == view.centerXAnchor
+    }
+    
+    @objc
+    private func seeSavedGeoFencesTapped() {
+        let vc = GeoFenceListViewController()
+        present(vc, animated: true)
+    }
     ///
     /// Sets map view region to user's location
     ///

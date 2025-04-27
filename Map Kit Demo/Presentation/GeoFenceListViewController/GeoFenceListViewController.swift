@@ -37,7 +37,6 @@ class GeoFenceListViewController: UIViewController {
     }
     
     func configureUI() {
-        title = "Location Tracker"
         configureNavBar()
         configureTableView()
     }
@@ -58,7 +57,7 @@ class GeoFenceListViewController: UIViewController {
         customNavBar.addSubview(backButton)
         
         // Title label configuration
-        titleLabel.text = "Location Tracker"
+        titleLabel.text = "Saved Geo-Fences"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textAlignment = .center
         customNavBar.addSubview(titleLabel)

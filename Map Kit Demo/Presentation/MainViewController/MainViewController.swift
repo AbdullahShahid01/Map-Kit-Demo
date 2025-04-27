@@ -80,6 +80,8 @@ class MainViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.setTitle("See Saved Geo Fences", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.configuration = .borderedProminent()
+        button.layer.cornerRadius = 4
         button.addTarget(self, action: #selector(seeSavedGeoFencesTapped), for: .touchUpInside)
         view.addSubview(button)
         button.bottomAnchor == view.safeAreaLayoutGuide.bottomAnchor + 8

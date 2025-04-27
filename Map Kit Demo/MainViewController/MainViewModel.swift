@@ -10,7 +10,7 @@ import CoreLocation
 import UserNotifications
 import Alamofire
 
-final class ViewModel: NSObject {
+final class MainViewModel: NSObject {
     
     enum Input {
         case viewDidLoad
@@ -167,7 +167,7 @@ final class ViewModel: NSObject {
 
 
 // MARK: - CLLocationManagerDelegate
-extension ViewModel: CLLocationManagerDelegate {
+extension MainViewModel: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedAlways:

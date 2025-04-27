@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import UserNotifications
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("Notification permission error: \(error)")
             }
         }
+        IQKeyboardManager.shared.isEnabled = true
         return true
     }
 

@@ -10,14 +10,14 @@ import MapKit
 import CoreLocation
 import UserNotifications
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var activityIndicatorView: UIView!
     
-    private let viewModel = ViewModel()
+    private let viewModel = MainViewModel()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         configureBindings()
     }
     
-    func configureBindings() {
+    private func configureBindings() {
         viewModel.output = { [weak self] output in
             guard let strongSelf = self else { return }
             switch output {
@@ -123,10 +123,15 @@ class ViewController: UIViewController {
         // Format: "minLon,minLat,maxLon,maxLat"
         return String(format: "%.6f,%.6f,%.6f,%.6f", minLon, minLat, maxLon, maxLat)
     }
+    
+    private func showAddGeoFencePopup() {
+        let vc = AddGeoFencePopup()
+        self.present(vc, animated: true)
+    }
 }
 
 // MARK: - MKMapViewDelegate
-extension ViewController: MKMapViewDelegate {
+extension MainViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circleOverlay = overlay as? MKCircle {
             let renderer = MKCircleRenderer(circle: circleOverlay)
@@ -161,11 +166,7 @@ extension ViewController: MKMapViewDelegate {
 //    }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("Selected annotation: \(view.annotation!)")
-        print("Selected annotation: \(view.annotation?.coordinate.latitude)")
-        print("Selected annotation: \(view.annotation?.coordinate.longitude)")
-        print("Selected annotation: \(view.annotation?.title)")
-        print("Selected annotation: \(view.annotation?.subtitle)")
+        showAddGeoFencePopup()
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
@@ -183,7 +184,7 @@ extension ViewController: MKMapViewDelegate {
     }
 }
 
-extension ViewController: UISearchBarDelegate {
+extension MainViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         true
     }

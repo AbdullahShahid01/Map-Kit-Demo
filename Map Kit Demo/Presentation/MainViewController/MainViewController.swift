@@ -127,6 +127,14 @@ class MainViewController: UIViewController {
             annotation.title = place.displayName
             mapView.addAnnotation(annotation)
         }
+        if let lat = places.first?.lat,
+           let long = places.first?.lon,
+           let latitude = Double(lat),
+           let longitude = Double(long)
+        {
+            mapView.setCenter( CLLocationCoordinate2D(latitude: latitude, longitude: longitude), animated: true)
+        }
+        
     }
     
     private func getViewbox(/*from mapView: MKMapView*/) -> String {

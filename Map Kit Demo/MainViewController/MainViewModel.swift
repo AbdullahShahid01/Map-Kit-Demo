@@ -40,18 +40,20 @@ final class MainViewModel: NSObject {
     let locationManager = CLLocationManager()
     let geofences: [Geofence] = [
         Geofence(
-            identifier: "CustomGeofence",
+            identifier: UUID(),
             name: "Afshan Colony, Rawalpindi",
             centerLatitude: 33.597892,
             centerLongitude: 73.021813,
-            radius: 100
+            radius: 100,
+            userNote: "Sample note"
         ),
         Geofence(
-            identifier: "CustomGeofence",
+            identifier: UUID(),
             name: "Mumbai",
             centerLatitude: 19.017175,
             centerLongitude: 72.856001,
-            radius: 100
+            radius: 100,
+            userNote: "Example note here"
         )
     ]
     
@@ -99,11 +101,11 @@ final class MainViewModel: NSObject {
             print("Geofencing is not supported on this device!")
             return
         }
-        for (i, geofence) in geofences.enumerated() {
+        for geofence in geofences {
             let region = CLCircularRegion(
                 center: CLLocationCoordinate2D(latitude: geofence.centerLatitude, longitude: geofence.centerLongitude),
                 radius: geofence.radius,
-                identifier: geofence.identifier + "\(i)"
+                identifier: geofence.identifier.uuidString
             )
             region.notifyOnEntry = true
             region.notifyOnExit = true
@@ -183,7 +185,7 @@ extension MainViewModel: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         for (i, geofence) in geofences.enumerated() {
-            if region.identifier == geofence.identifier + "\(i)" {
+            if region.identifier == geofence.identifier.uuidString {
                 sendNotification(title: "Welcome!", body: "You've entered \(geofence.name)")
             }
         }
@@ -191,7 +193,7 @@ extension MainViewModel: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         for (i, geofence) in geofences.enumerated() {
-            if region.identifier == geofence.identifier + "\(i)" {
+            if region.identifier == geofence.identifier.uuidString {
                 sendNotification(title: "Goodbye!", body: "You've left \(geofence.name)")
             }
         }

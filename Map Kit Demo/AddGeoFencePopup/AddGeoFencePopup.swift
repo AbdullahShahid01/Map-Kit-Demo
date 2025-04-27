@@ -13,10 +13,12 @@ final class AddGeoFencePopup: UIViewController {
     private let mainStackView = UIStackView()
     private let circularSlider = CircularSlider()
     private let sliderValueLabel = UILabel()
+    private let noteTextField = UITextField()
     
-    private let viewModel = AddGeoFencePopupViewModel()
+    private let viewModel: AddGeoFencePopupViewModel
     
-    init() {
+    init(viewModel: AddGeoFencePopupViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
         configureBindings()
@@ -134,7 +136,7 @@ final class AddGeoFencePopup: UIViewController {
     }
     
     private func configureNoteTextField() {
-        let noteTextField = UITextField()
+        
         noteTextField.placeholder = "Enter Note..."
         noteTextField.font = .systemFont(ofSize: 17)
         noteTextField.returnKeyType = .done
@@ -195,6 +197,9 @@ final class AddGeoFencePopup: UIViewController {
     
     @objc
     private func saveButtonTapped() {
+        viewModel.userNote = noteTextField.text ?? ""
+        viewModel.radius = circularSlider.endPointValue
+        viewModel.input(.saveButtonTapped)
         dismiss(animated: true)
     }
     

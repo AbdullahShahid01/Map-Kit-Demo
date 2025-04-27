@@ -124,8 +124,14 @@ class MainViewController: UIViewController {
         return String(format: "%.6f,%.6f,%.6f,%.6f", minLon, minLat, maxLon, maxLat)
     }
     
-    private func showAddGeoFencePopup() {
-        let vc = AddGeoFencePopup()
+    private func showAddGeoFencePopup(name: String, longitude: Double, latitude: Double) {
+        let vc = AddGeoFencePopup(
+            viewModel: AddGeoFencePopupViewModel(
+                name: name,
+                longitude: longitude,
+                latitude: latitude
+            )
+        )
         self.present(vc, animated: true)
     }
 }
@@ -166,7 +172,10 @@ extension MainViewController: MKMapViewDelegate {
 //    }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        showAddGeoFencePopup()
+        showAddGeoFencePopup(
+            name: (view.annotation?.title ?? "") ?? "",
+            longitude: view.annotation?.coordinate.longitude ?? 0,
+            latitude: view.annotation?.coordinate.latitude ?? 0)
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {

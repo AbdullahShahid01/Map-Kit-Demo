@@ -30,6 +30,7 @@ final class LocationCell: UITableViewCell {
         selectionStyle = .none
         
         nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        nameLabel.numberOfLines = 0
         longitudeLabel.font = UIFont.systemFont(ofSize: 14)
         latitudeLabel.font = UIFont.systemFont(ofSize: 14)
         radiusLabel.font = UIFont.systemFont(ofSize: 14)
@@ -61,11 +62,11 @@ final class LocationCell: UITableViewCell {
         noteLabel.bottomAnchor == contentView.bottomAnchor - 8
     }
     
-    func configure(with location: Geofence) {
-        nameLabel.text = "Name: \(location.name)"
+    func configure(with location: GeoFence) {
+        nameLabel.text = "Name: \(location.name ?? "")"
         longitudeLabel.text = String(format: "Longitude: %.4f", location.centerLongitude)
         latitudeLabel.text = String(format: "Latitude: %.4f", location.centerLatitude)
         radiusLabel.text = "Radius: \(location.radius) meters"
-        noteLabel.text = "Note: \(location.userNote)"
+        noteLabel.text = "Note: \(location.userNote ?? "")"
     }
 }

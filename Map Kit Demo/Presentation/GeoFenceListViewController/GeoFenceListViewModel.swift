@@ -21,16 +21,15 @@ final class GeoFenceListViewModel {
     
     var output: ((Output)->())?
     
-    private(set) var locations: [Geofence] = [
-        Geofence(identifier: UUID(), name: "NAme", centerLatitude: 0, centerLongitude: 0, radius: 100, userNote: "Mote "),
-        Geofence(identifier: UUID(), name: "NAme", centerLatitude: 0, centerLongitude: 0, radius: 100, userNote: "Mote "),
-        Geofence(identifier: UUID(), name: "NAme", centerLatitude: 0, centerLongitude: 0, radius: 100, userNote: "Mote "),
-        Geofence(identifier: UUID(), name: "NAme", centerLatitude: 0, centerLongitude: 0, radius: 100, userNote: "Mote dafds fa sdf adsf a sdfasd fasd fakjs f askdf akd fka dfk asdkf adks fak dfka dsfk adkf adkj fka sdk fakd fkjs dfja dskfj akjsdf")
-    ]
+    var locations: [GeoFence] {
+        return geoFenceRepository.getAll() ?? []
+    }
     
     var tableViewRowCount: Int {
         return locations.count
     }
+    
+    private let geoFenceRepository = DefaultGeoFenceRepository()
     
     func input(_ input: Input) {
         switch input {

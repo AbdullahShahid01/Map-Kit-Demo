@@ -84,6 +84,7 @@ class GeoFenceListViewController: UIViewController {
         
         tableView.register(LocationCell.self, forCellReuseIdentifier: "LocationCell")
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
     }
@@ -109,5 +110,11 @@ extension GeoFenceListViewController: UITableViewDataSource {
         
         cell.configure(with: location)
         return cell
+    }
+}
+
+extension GeoFenceListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

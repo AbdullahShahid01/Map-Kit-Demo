@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB224B5D2DBCA6100049B597 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CB224B5C2DBCA6100049B597 /* Toast */; };
 		CB8355432DBE3BB40060D088 /* HGCircularSlider in Frameworks */ = {isa = PBXBuildFile; productRef = CB8355422DBE3BB40060D088 /* HGCircularSlider */; };
 		CB83554F2DBE6F3C0060D088 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB83554E2DBE6F3C0060D088 /* IQKeyboardManagerSwift */; };
 		CBCAE4902DBBA4A400626A29 /* Anchorage in Frameworks */ = {isa = PBXBuildFile; productRef = CBCAE48F2DBBA4A400626A29 /* Anchorage */; };
@@ -46,7 +45,6 @@
 			files = (
 				CB83554F2DBE6F3C0060D088 /* IQKeyboardManagerSwift in Frameworks */,
 				CBE0CE762DBD33000079B316 /* Alamofire in Frameworks */,
-				CB224B5D2DBCA6100049B597 /* Toast in Frameworks */,
 				CBCAE4902DBBA4A400626A29 /* Anchorage in Frameworks */,
 				CB8355432DBE3BB40060D088 /* HGCircularSlider in Frameworks */,
 			);
@@ -100,7 +98,6 @@
 			name = "Map Kit Demo";
 			packageProductDependencies = (
 				CBCAE48F2DBBA4A400626A29 /* Anchorage */,
-				CB224B5C2DBCA6100049B597 /* Toast */,
 				CBE0CE752DBD33000079B316 /* Alamofire */,
 				CB8355422DBE3BB40060D088 /* HGCircularSlider */,
 				CB83554E2DBE6F3C0060D088 /* IQKeyboardManagerSwift */,
@@ -135,7 +132,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				CBCAE48E2DBBA4A400626A29 /* XCRemoteSwiftPackageReference "Anchorage" */,
-				CB224B5B2DBCA6100049B597 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				CBE0CE742DBD33000079B316 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CB8355412DBE3BB40060D088 /* XCRemoteSwiftPackageReference "HGCircularSlider" */,
 				CB83554D2DBE6F3C0060D088 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
@@ -378,14 +374,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CB224B5B2DBCA6100049B597 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scalessec/Toast-Swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.1;
-			};
-		};
 		CB8355412DBE3BB40060D088 /* XCRemoteSwiftPackageReference "HGCircularSlider" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/HamzaGhazouani/HGCircularSlider";
@@ -421,11 +409,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CB224B5C2DBCA6100049B597 /* Toast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CB224B5B2DBCA6100049B597 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
-			productName = Toast;
-		};
 		CB8355422DBE3BB40060D088 /* HGCircularSlider */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CB8355412DBE3BB40060D088 /* XCRemoteSwiftPackageReference "HGCircularSlider" */;

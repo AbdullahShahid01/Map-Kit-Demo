@@ -129,7 +129,7 @@ final class MainViewModel: NSObject {
     // MARK: - Notification
     private func sendNotification(title: String, body: String) {
         let content = UNMutableNotificationContent()
-        content.title = title + " \(Date())"
+        content.title = title
         content.body = body
         content.sound = .default
         

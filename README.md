@@ -19,3 +19,7 @@ This app lets users explore points of interest (e.g., cafes, landmarks) fetched 
 - **Anchorage:** Used for applying constraints in simpler way when creating UI programmatically.
 - **HGCircularSlider:** Customizable circular slider for radius selection.
 - **IQKeyboardManager:** Automatically manages keyboard interactions.
+
+## Other Libraries Used
+- **CoreData:** Used to store Geo-fence data
+- **MapKit:** Used to display map and map related data

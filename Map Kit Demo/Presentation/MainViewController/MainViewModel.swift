@@ -24,6 +24,7 @@ final class MainViewModel: NSObject {
         case hideLoader
         case showSettingsPopup
         case showLocationPermissionAlert
+        case showAlert(String)
     }
     
     var output: ((Output)->())?
@@ -61,9 +62,11 @@ final class MainViewModel: NSObject {
                 fetchPlaces(searchQuery: text, viewBox: viewBox/*"72.5,33.4,73.5,33.8"*/) { [weak self] places in
                     guard let strongSelf = self else { return }
                     strongSelf.output?(.hideLoader)
-                    if let places = places {
+                    if let places = places, !places.isEmpty {
                         print(places.count)
                         strongSelf.output?(.addCustomMarkers(places))
+                    } else {
+                        strongSelf.output?(.showAlert("No places found in this region. Change region or change keyword and try again."))
                     }
                 }
             }

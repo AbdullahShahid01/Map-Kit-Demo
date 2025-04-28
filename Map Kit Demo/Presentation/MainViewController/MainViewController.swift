@@ -46,6 +46,8 @@ class MainViewController: UIViewController {
                 strongSelf.showSettingsPopup()
             case .showLocationPermissionAlert:
                 strongSelf.showLocationPermissionAlert()
+            case .showAlert(let message):
+                strongSelf.showAlert(message: message)
             }
         }
     }
@@ -202,6 +204,12 @@ class MainViewController: UIViewController {
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .cancel))
+        present(alert, animated: true)
     }
 }
 

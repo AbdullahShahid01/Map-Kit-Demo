@@ -22,6 +22,7 @@ final class MainViewModel: NSObject {
         case addCustomMarkers([Place])
         case showLoader
         case hideLoader
+        case showSettingsPopup
     }
     
     var output: ((Output)->())?
@@ -76,7 +77,11 @@ final class MainViewModel: NSObject {
     }
     
     private func requestNotificationAuthorization() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { [weak self] granted, error in
+            guard let strongSelf = self else { return }
+            if !granted {
+                strongSelf.output?(.showSettingsPopup)
+            }
             if let error = error {
                 print("Error requesting notification permissions: \(error.localizedDescription)")
             }

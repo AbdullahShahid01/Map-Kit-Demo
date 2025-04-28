@@ -42,6 +42,8 @@ class MainViewController: UIViewController {
                 strongSelf.activityIndicatorView.isHidden = false
             case .hideLoader:
                 strongSelf.activityIndicatorView.isHidden = true
+            case .showSettingsPopup:
+                strongSelf.showSettingsPopup()
             }
         }
     }
@@ -161,6 +163,20 @@ class MainViewController: UIViewController {
             )
         )
         self.present(vc, animated: true)
+    }
+    
+    private func showSettingsPopup() {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            let alert = UIAlertController(title: "Permission Required", message: "Need notifications permission to get notified when you enter or leave a geo fence", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
+                if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            strongSelf.present(alert, animated: true)
+        }
     }
 }
 

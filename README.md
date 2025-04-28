@@ -13,3 +13,9 @@ This app lets users explore points of interest (e.g., cafes, landmarks) fetched 
 - **Custom Radius Slider**: A dynamic circular slider for selecting geofence size.
 - **Offline Support**: Persist reminders and display them without network access.
 - **Error Handling**: Gracefully location permission denials and Notification permission denials.
+
+## Third-party Libraries
+- **Alamofire:** Used for handling network requests.
+- **Anchorage:** Used for applying constraints in simpler way when creating UI programmatically.
+- **HGCircularSlider:** Customizable circular slider for radius selection.
+- **IQKeyboardManager:** Automatically manages keyboard interactions.

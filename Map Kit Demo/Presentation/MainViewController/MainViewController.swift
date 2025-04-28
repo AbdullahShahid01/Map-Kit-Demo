@@ -44,6 +44,8 @@ class MainViewController: UIViewController {
                 strongSelf.activityIndicatorView.isHidden = true
             case .showSettingsPopup:
                 strongSelf.showSettingsPopup()
+            case .showLocationPermissionAlert:
+                strongSelf.showLocationPermissionAlert()
             }
         }
     }
@@ -176,6 +178,29 @@ class MainViewController: UIViewController {
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             strongSelf.present(alert, animated: true)
+        }
+    }
+    
+    private func showLocationPermissionAlert() {
+        let alert = UIAlertController(
+            title: "Location Permission Required",
+            message: "Please enable location access in Settings to use this feature.",
+            preferredStyle: .alert
+        )
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(settingsAction)
+        alert.addAction(cancelAction)
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }

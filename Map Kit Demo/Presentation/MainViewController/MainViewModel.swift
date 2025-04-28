@@ -23,6 +23,7 @@ final class MainViewModel: NSObject {
         case showLoader
         case hideLoader
         case showSettingsPopup
+        case showLocationPermissionAlert
     }
     
     var output: ((Output)->())?
@@ -52,7 +53,7 @@ final class MainViewModel: NSObject {
             output?(.configureUI)
             setupLocationManager()
             requestNotificationAuthorization()
-            
+            checkLocationAuthorization()
         case .searchButtonTapped:
             output?(.showLoader)
             let text = searchBarText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -74,6 +75,24 @@ final class MainViewModel: NSObject {
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.requestAlwaysAuthorization()
         locationManager.allowsBackgroundLocationUpdates = true
+    }
+    
+    private func checkLocationAuthorization() {
+        let status = locationManager.authorizationStatus
+        
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            // Location access granted; proceed with location-related tasks
+            break
+        case .denied, .restricted:
+            // Location access denied; show alert
+            output?(.showLocationPermissionAlert)
+        case .notDetermined:
+            // Request location permission
+            locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            break
+        }
     }
     
     private func requestNotificationAuthorization() {
@@ -172,6 +191,7 @@ extension MainViewModel: CLLocationManagerDelegate {
             print("Location authorized when in use - geofencing might not work in background")
         case .denied, .restricted:
             print("Location access denied")
+            output?(.showLocationPermissionAlert)
         default:
             break
         }

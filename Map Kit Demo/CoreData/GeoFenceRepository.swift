@@ -56,15 +56,15 @@ final class DefaultGeoFenceRepository: GeoFenceRepository {
         return nil
     }
     
-    func update(geoFence: Geofence) -> Bool {
-        guard let geoFence = get(byIdentifier: geoFence.identifier) else { return false }
+    func update(geoFence updated: Geofence) -> Bool {
+        guard let geoFence = get(byIdentifier: updated.identifier) else { return false }
         
-        geoFence.identifier = geoFence.identifier
-        geoFence.name = geoFence.name
-        geoFence.centerLatitude = geoFence.centerLatitude
-        geoFence.centerLongitude = geoFence.centerLongitude
-        geoFence.radius = geoFence.radius
-        geoFence.userNote = geoFence.userNote
+//        geoFence.identifier = updated.identifier
+        geoFence.name = updated.name
+        geoFence.centerLatitude = updated.centerLatitude
+        geoFence.centerLongitude = updated.centerLongitude
+        geoFence.radius = updated.radius
+        geoFence.userNote = updated.userNote
         
         return CoreDataManager.shared.saveContext()
     }

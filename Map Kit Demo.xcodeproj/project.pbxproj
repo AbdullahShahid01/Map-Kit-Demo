@@ -13,7 +13,18 @@
 		CBE0CE762DBD33000079B316 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CBE0CE752DBD33000079B316 /* Alamofire */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CB73EAF72DBF7E2900030B34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBCAE46E2DBBA04900626A29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBCAE4752DBBA04900626A29;
+			remoteInfo = "Map Kit Demo";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		CB73EAF32DBF7E2900030B34 /* Map Kit DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Map Kit DemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBCAE4762DBBA04900626A29 /* Map Kit Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Map Kit Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -28,6 +39,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		CB73EAF42DBF7E2900030B34 /* Map Kit DemoTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Map Kit DemoTests";
+			sourceTree = "<group>";
+		};
 		CBCAE4782DBBA04900626A29 /* Map Kit Demo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -39,6 +55,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CB73EAF02DBF7E2900030B34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBCAE4732DBBA04900626A29 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -64,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				CBCAE4782DBBA04900626A29 /* Map Kit Demo */,
+				CB73EAF42DBF7E2900030B34 /* Map Kit DemoTests */,
 				CB8355502DBE6F920060D088 /* Frameworks */,
 				CBCAE4772DBBA04900626A29 /* Products */,
 			);
@@ -73,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				CBCAE4762DBBA04900626A29 /* Map Kit Demo.app */,
+				CB73EAF32DBF7E2900030B34 /* Map Kit DemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +105,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CB73EAF22DBF7E2900030B34 /* Map Kit DemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB73EAF92DBF7E2900030B34 /* Build configuration list for PBXNativeTarget "Map Kit DemoTests" */;
+			buildPhases = (
+				CB73EAEF2DBF7E2900030B34 /* Sources */,
+				CB73EAF02DBF7E2900030B34 /* Frameworks */,
+				CB73EAF12DBF7E2900030B34 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB73EAF82DBF7E2900030B34 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CB73EAF42DBF7E2900030B34 /* Map Kit DemoTests */,
+			);
+			name = "Map Kit DemoTests";
+			packageProductDependencies = (
+			);
+			productName = "Map Kit DemoTests";
+			productReference = CB73EAF32DBF7E2900030B34 /* Map Kit DemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CBCAE4752DBBA04900626A29 /* Map Kit Demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CBCAE4892DBBA04A00626A29 /* Build configuration list for PBXNativeTarget "Map Kit Demo" */;
@@ -116,6 +164,10 @@
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					CB73EAF22DBF7E2900030B34 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = CBCAE4752DBBA04900626A29;
+					};
 					CBCAE4752DBBA04900626A29 = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -142,11 +194,19 @@
 			projectRoot = "";
 			targets = (
 				CBCAE4752DBBA04900626A29 /* Map Kit Demo */,
+				CB73EAF22DBF7E2900030B34 /* Map Kit DemoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CB73EAF12DBF7E2900030B34 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBCAE4742DBBA04900626A29 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,6 +217,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CB73EAEF2DBF7E2900030B34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBCAE4722DBBA04900626A29 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,7 +233,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CB73EAF82DBF7E2900030B34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CBCAE4752DBBA04900626A29 /* Map Kit Demo */;
+			targetProxy = CB73EAF72DBF7E2900030B34 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		CB73EAFA2DBF7E2900030B34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 52DPF52M65;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abc.Map-Kit-DemoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Map Kit Demo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Map Kit Demo";
+			};
+			name = Debug;
+		};
+		CB73EAFB2DBF7E2900030B34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 52DPF52M65;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abc.Map-Kit-DemoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Map Kit Demo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Map Kit Demo";
+			};
+			name = Release;
+		};
 		CBCAE48A2DBBA04A00626A29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -353,6 +464,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CB73EAF92DBF7E2900030B34 /* Build configuration list for PBXNativeTarget "Map Kit DemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB73EAFA2DBF7E2900030B34 /* Debug */,
+				CB73EAFB2DBF7E2900030B34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CBCAE4712DBBA04900626A29 /* Build configuration list for PBXProject "Map Kit Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
